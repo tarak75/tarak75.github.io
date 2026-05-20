@@ -27,28 +27,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Форма контактов
   const contactForm = document.getElementById("contactForm");
   const contactMessage = document.getElementById("contactMessage");
-
+  
   if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const subject = document.getElementById("subject").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      if (!name || !email || !subject || !message) {
-        contactMessage.textContent = "Пожалуйста, заполните все поля.";
-        contactMessage.style.color = "#d63939";
-        return;
+    contactForm.addEventListener("submit", function () {
+      if (contactMessage) {
+        contactMessage.textContent = "Сообщение отправляется...";
+        contactMessage.style.color = "#0f8f75";
       }
-
-      contactMessage.textContent = "Сообщение успешно отправлено!";
-      contactMessage.style.color = "#0f8f75";
-      contactForm.reset();
     });
   }
-
+  
   // Показ/скрытие пароля
   const toggleButtons = document.querySelectorAll(".toggle-password");
   toggleButtons.forEach(btn => {
