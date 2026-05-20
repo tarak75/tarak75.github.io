@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Создать аккаунт</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="auth-page">
+    <div class="auth-wrapper">
+        <a href="index.html" class="back-link">← Назад на главную</a>
+
+        <div class="auth-card">
+            <h1>Создать аккаунт</h1>
+            <p class="auth-subtitle">Присоединяйтесь к нам сегодня</p>
+
+            <form id="registerForm" class="auth-form">
+                <label for="registerName">Имя</label>
+                <input type="text" id="registerName" placeholder="Ваше имя" required>
+
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" placeholder="example@mail.com" required>
+
+                <label for="registerPassword">Пароль</label>
+                <div class="password-wrap">
+                    <input type="password" id="registerPassword" placeholder="••••••••" required>
+                    <button type="button" class="toggle-password" data-target="registerPassword">👁</button>
+                </div>
+                <p class="password-hint">
+                    Пароль должен содержать минимум 8 символов, заглавную и строчную букву, цифру, специальный символ и не содержать
+                    пробелов.             
+                </p>
+
+                <label for="registerConfirmPassword">Подтвердите пароль</label>
+                <input type="password" id="registerConfirmPassword" placeholder="••••••••" required>
+
+                <button type="submit" class="btn btn-primary btn-full">Создать аккаунт</button>
+
+                <p class="auth-switch">
+                    Уже есть аккаунт? <a href="login.html">Войти</a>
+                </p>
+
+                <div class="divider"><span>Или продолжить с</span></div>
+
+                <div class="social-auth">
+                    <button type="button" class="social-login">Google</button>
+                    <button type="button" class="social-login">yandex</button>
+                </div>
+
+                <p class="form-message" id="registerMessage"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

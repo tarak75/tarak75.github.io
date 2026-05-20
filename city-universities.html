@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>City Universities — Study in Russia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .city-uni-page {
+            padding-top: 100px;
+            padding-bottom: 70px;
+        }
+
+        .city-uni-head {
+            margin-bottom: 28px;
+        }
+
+        .city-uni-head h1 {
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #081c4d;
+        }
+
+        .city-uni-head p {
+            max-width: 900px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .city-filter-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 26px 0 34px;
+        }
+
+        .city-filter-btn {
+            min-height: 44px;
+            padding: 0 22px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            color: #081c4d;
+            font-weight: 800;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(17, 165, 134, 0.14);
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .city-filter-btn:hover,
+        .city-filter-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .city-uni-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .city-uni-card {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 270px;
+        }
+
+        .city-uni-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .city-uni-type {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            min-height: 28px;
+            padding: 4px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .type-university {
+            background: rgba(17, 165, 134, 0.12);
+            color: #0b6d62;
+        }
+
+        .type-medical {
+            background: rgba(220, 38, 38, 0.10);
+            color: #991b1b;
+        }
+
+        .city-uni-card h3 {
+            font-size: 24px;
+            line-height: 1.25;
+            color: #081c4d;
+            margin-bottom: 10px;
+        }
+
+        .city-uni-card p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .city-uni-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .city-uni-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 28px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #d9d9d9;
+            color: #1f2937;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .city-uni-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            min-height: 42px;
+            padding: 0 18px;
+            border-radius: 999px;
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 800;
+            text-decoration: none;
+            transition: 0.25s ease;
+            margin-top: auto;
+        }
+
+        .city-uni-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .city-empty {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            padding: 26px;
+            box-shadow: var(--shadow);
+            color: var(--muted);
+            font-size: 18px;
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 900px) {
+            .city-uni-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .city-filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Таракан</a>
+
+            <div class="nav-actions">
+                <a href="city.html" class="btn btn-outline">← Back to Cities</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="study-russia-page">
+        <section class="section city-uni-page">
+            <div class="container">
+                <div class="city-uni-head">
+                    <span class="study-pill dark-pill">City Universities</span>
+                    <h1 id="cityTitle">Universities</h1>
+                    <p id="cityDescription">
+                        Here you can see universities in this city.
+                    </p>
+
+                    <div class="city-filter-buttons">
+                        <button class="city-filter-btn active" data-filter="all">All</button>
+                        <button class="city-filter-btn" data-filter="university">University</button>
+                        <button class="city-filter-btn" data-filter="medical">Medical</button>
+                    </div>
+                </div>
+
+                <div class="city-uni-grid" id="cityUniversityList"></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const cityNames = {
+            "moscow": "Moscow",
+            "saint-petersburg": "Saint Petersburg",
+            "kazan": "Kazan",
+            "tomsk": "Tomsk",
+            "novosibirsk": "Novosibirsk",
+            "yekaterinburg": "Yekaterinburg",
+            "nizhny-novgorod": "Nizhny Novgorod",
+            "vladivostok": "Vladivostok",
+            "samara": "Samara",
+            "rostov-on-don": "Rostov-on-Don"
+        };
+
+        const cityUniversities = {
+            "moscow": [
+                {
+                    name: "Russian State University name after kosygin",
+                    desc: "Strong university for textile, design, technology and design-related programs.",
+                    tags: ["Textile", "Technology", "Design"],
+                    url: "https://www.rguk.ru/"
+                },
+                {
+                    type: "university",
+                    name: "HSE University",
+                    desc: "Strong university for economics, data science, technology, social sciences and design-related programs.",
+                    tags: ["Economics", "Technology", "Data Science"],
+                    url: "https://www.hse.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "Lomonosov Moscow State University",
+                    desc: "One of the most famous classical universities in Russia with many study directions.",
+                    tags: ["Science", "Humanities", "Research"],
+                    url: "https://msu.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "Bauman Moscow State Technical University",
+                    desc: "A strong technical university for engineering, robotics and technology.",
+                    tags: ["Engineering", "Technology", "Robotics"],
+                    url: "https://bmstu.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "MGIMO University",
+                    desc: "Known for international relations, law, diplomacy and global studies.",
+                    tags: ["International Relations", "Law", "Diplomacy"],
+                    url: "https://english.mgimo.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Financial University",
+                    desc: "A strong Moscow university for finance, economics, management and business education.",
+                    tags: ["Finance", "Economics", "Business"],
+                    url: "https://fa.ru/"
+                },
+                {
+                    type: "university",
+                    name: "RANEPA",
+                    desc: "University for public administration, management, economics and social sciences.",
+                    tags: ["Management", "Public Policy", "Economics"],
+                    url: "https://www.ranepa.ru/"
+                },
+                {
+                    type: "university",
+                    name: "MISIS University",
+                    desc: "A national research university focused on materials science, engineering and technology.",
+                    tags: ["Materials", "Engineering", "Technology"],
+                    url: "https://en.misis.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Plekhanov Russian University of Economics",
+                    desc: "A Moscow university focused on economics, business, management and trade.",
+                    tags: ["Economics", "Business", "Management"],
+                    url: "https://www.rea.ru/en"
+                },
+                {
+                    type: "university",
+                    name: "MIREA — Russian Technological University",
+                    desc: "A technology university focused on IT, electronics, cybersecurity and engineering.",
+                    tags: ["IT", "Cybersecurity", "Technology"],
+                    url: "https://english.mirea.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Moscow Polytechnic University",
+                    desc: "A university for engineering, design, technology and creative technical fields.",
+                    tags: ["Engineering", "Design", "Technology"],
+                    url: "https://mospolytech.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "Moscow Power Engineering Institute",
+                    desc: "A technical university focused on energy, electrical engineering and power systems.",
+                    tags: ["Energy", "Electrical Engineering", "Technology"],
+                    url: "https://mpei.ru/lang/en"
+                },
+                {
+                    type: "university",
+                    name: "Moscow Aviation Institute",
+                    desc: "A university for aviation, aerospace engineering, aircraft systems and space technologies.",
+                    tags: ["Aviation", "Engineering", "Space"],
+                    url: "https://en.mai.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Moscow State University of Civil Engineering",
+                    desc: "A university for civil engineering, architecture, construction and urban infrastructure.",
+                    tags: ["Civil Engineering", "Architecture", "Construction"],
+                    url: "https://mgsu.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "Gubkin University",
+                    desc: "A university focused on oil, gas, energy, engineering and petroleum technologies.",
+                    tags: ["Oil and Gas", "Engineering", "Energy"],
+                    url: "https://gubkin.university/"
+                },
+                {
+                    type: "university",
+                    name: "Russian State University for the Humanities",
+                    desc: "A university for humanities, history, culture, languages and social sciences.",
+                    tags: ["Humanities", "History", "Culture"],
+                    url: "https://www.rsuh.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "Russian University of Transport",
+                    desc: "A university focused on transport systems, logistics, engineering and infrastructure.",
+                    tags: ["Transport", "Engineering", "Logistics"],
+                    url: "https://rut-miit.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Sechenov University",
+                    desc: "Major medical university in Moscow for medicine, dentistry, pharmacy and biomedical fields.",
+                    tags: ["Medicine", "Dentistry", "Pharmacy"],
+                    url: "https://www.sechenov.ru/eng/"
+                },
+                {
+                    type: "medical",
+                    name: "Pirogov Russian National Research Medical University",
+                    desc: "Large medical university for general medicine, pediatrics, biomedicine and clinical education.",
+                    tags: ["Medicine", "Pediatrics", "Biomedicine"],
+                    url: "https://pirogov-university.com/"
+                },
+                {
+                    type: "medical",
+                    name: "A.I. Yevdokimov Moscow State University of Medicine and Dentistry",
+                    desc: "Medical and dental university in Moscow with dentistry and medical programs.",
+                    tags: ["Dentistry", "Medicine", "Clinics"],
+                    url: "https://en.msmsu.ru/university/"
+                },
+                {
+                    type: "medical",
+                    name: "RUDN University — Institute of Medicine",
+                    desc: "Medical institute inside RUDN University with international medical education environment.",
+                    tags: ["Medicine", "International", "Healthcare"],
+                    url: "https://eng.rudn.ru/education/schools-and-departments/institutions/institute-of-medicine/"
+                },
+                {
+                    type: "medical",
+                    name: "MSU Faculty of Fundamental Medicine",
+                    desc: "Medical faculty of Lomonosov Moscow State University for fundamental medicine.",
+                    tags: ["Fundamental Medicine", "Research", "MSU"],
+                    url: "https://www.fbm.msu.ru/"
+                }
+            ],
+
+            "saint-petersburg": [
+                {
+                    type: "university",
+                    name: "Saint Petersburg State University",
+                    desc: "A major classical university with strong science, humanities and law programs.",
+                    tags: ["Science", "Humanities", "Law"],
+                    url: "https://english.spbu.ru/"
+                },
+                {
+                    type: "university",
+                    name: "ITMO University",
+                    desc: "Strong in IT, AI, engineering, optics and modern technologies.",
+                    tags: ["IT", "AI", "Engineering"],
+                    url: "https://en.itmo.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Peter the Great St. Petersburg Polytechnic University",
+                    desc: "A strong engineering and technology university.",
+                    tags: ["Engineering", "Technology", "Industry"],
+                    url: "https://english.spbstu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Pavlov First Saint Petersburg State Medical University",
+                    desc: "Medical university in Saint Petersburg.",
+                    tags: ["Medicine", "Healthcare", "Clinics"],
+                    url: "https://www.1spbgmu.ru/"
+                }
+            ],
+
+            "kazan": [
+                {
+                    type: "university",
+                    name: "Kazan Federal University",
+                    desc: "One of the main universities in Kazan with many programs and international students.",
+                    tags: ["Science", "Education", "International"],
+                    url: "https://eng.kpfu.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Kazan National Research Technological University",
+                    desc: "A university focused on technology, chemistry, engineering and industry.",
+                    tags: ["Technology", "Engineering", "Chemistry"],
+                    url: "https://www.kstu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Kazan State Medical University",
+                    desc: "A medical university popular among international students.",
+                    tags: ["Medicine", "Healthcare", "International"],
+                    url: "https://kazangmu.ru/"
+                }
+            ],
+
+            "tomsk": [
+                {
+                    type: "university",
+                    name: "Tomsk State University",
+                    desc: "A strong research university in Siberia with many academic directions.",
+                    tags: ["Science", "Research", "Humanities"],
+                    url: "https://en.tsu.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Tomsk Polytechnic University",
+                    desc: "Strong in engineering, energy, technology and research.",
+                    tags: ["Engineering", "Energy", "Technology"],
+                    url: "https://tpu.ru/en/"
+                },
+                {
+                    type: "medical",
+                    name: "Siberian State Medical University",
+                    desc: "Medical university in Tomsk.",
+                    tags: ["Medicine", "Healthcare", "Science"],
+                    url: "https://ssmu.ru/en/"
+                }
+            ],
+
+            "novosibirsk": [
+                {
+                    type: "university",
+                    name: "Novosibirsk State University",
+                    desc: "A strong research university connected with Akademgorodok.",
+                    tags: ["Science", "Research", "Technology"],
+                    url: "https://english.nsu.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Novosibirsk State Technical University",
+                    desc: "A technical university with engineering and applied science programs.",
+                    tags: ["Engineering", "Technology", "Applied Science"],
+                    url: "https://en.nstu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Novosibirsk State Medical University",
+                    desc: "Medical university in Novosibirsk.",
+                    tags: ["Medicine", "Healthcare", "Science"],
+                    url: "https://ngmu.ru/"
+                }
+            ],
+
+            "yekaterinburg": [
+                {
+                    type: "university",
+                    name: "Ural Federal University",
+                    desc: "A major university in the Ural region with many international programs.",
+                    tags: ["Engineering", "Science", "Technology"],
+                    url: "https://urfu.ru/en/"
+                },
+                {
+                    type: "medical",
+                    name: "Ural State Medical University",
+                    desc: "Medical university in Yekaterinburg.",
+                    tags: ["Medicine", "Healthcare", "Science"],
+                    url: "https://usma.ru/"
+                }
+            ],
+
+            "nizhny-novgorod": [
+                {
+                    type: "university",
+                    name: "Lobachevsky University",
+                    desc: "A strong university in Nizhny Novgorod with science, humanities and IT programs.",
+                    tags: ["Science", "IT", "Humanities"],
+                    url: "https://eng.unn.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Nizhny Novgorod State Technical University",
+                    desc: "Technical university for engineering and industrial fields.",
+                    tags: ["Engineering", "Technology", "Industry"],
+                    url: "https://www.nntu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Privolzhsky Research Medical University",
+                    desc: "Medical university in Nizhny Novgorod.",
+                    tags: ["Medicine", "Healthcare", "Research"],
+                    url: "https://pimunn.ru/"
+                }
+            ],
+
+            "vladivostok": [
+                {
+                    type: "university",
+                    name: "Far Eastern Federal University",
+                    desc: "A major university in Russia’s Far East with international and Asia-Pacific focus.",
+                    tags: ["International", "Asia-Pacific", "Science"],
+                    url: "https://www.dvfu.ru/en/"
+                },
+                {
+                    type: "university",
+                    name: "Vladivostok State University",
+                    desc: "University in Vladivostok with programs in economics, management, IT and design.",
+                    tags: ["Economics", "Management", "Design"],
+                    url: "https://www.vvsu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Pacific State Medical University",
+                    desc: "Medical university in Vladivostok.",
+                    tags: ["Medicine", "Healthcare", "Far East"],
+                    url: "https://tgmu.ru/"
+                }
+            ],
+
+            "samara": [
+                {
+                    type: "university",
+                    name: "Samara University",
+                    desc: "Strong in aerospace, engineering and technology.",
+                    tags: ["Aerospace", "Engineering", "Technology"],
+                    url: "https://ssau.ru/english"
+                },
+                {
+                    type: "university",
+                    name: "Samara State Technical University",
+                    desc: "Technical university for engineering, energy and industrial fields.",
+                    tags: ["Engineering", "Energy", "Industry"],
+                    url: "https://samgtu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Samara State Medical University",
+                    desc: "Medical university in Samara.",
+                    tags: ["Medicine", "Healthcare", "Research"],
+                    url: "https://samsmu.ru/"
+                }
+            ],
+
+            "rostov-on-don": [
+                {
+                    type: "university",
+                    name: "Southern Federal University",
+                    desc: "A major university in Southern Russia with many academic directions.",
+                    tags: ["Science", "Humanities", "Technology"],
+                    url: "https://sfedu.ru/"
+                },
+                {
+                    type: "university",
+                    name: "Don State Technical University",
+                    desc: "A technical university with engineering, technology and international student presence.",
+                    tags: ["Engineering", "Technology", "International"],
+                    url: "https://donstu.ru/"
+                },
+                {
+                    type: "medical",
+                    name: "Rostov State Medical University",
+                    desc: "A medical university in Rostov-on-Don.",
+                    tags: ["Medicine", "Healthcare", "Science"],
+                    url: "https://rostgmu.ru/"
+                }
+            ]
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const cityKey = params.get("city") || "moscow";
+
+        const title = document.getElementById("cityTitle");
+        const description = document.getElementById("cityDescription");
+        const list = document.getElementById("cityUniversityList");
+        const filterButtons = document.querySelectorAll(".city-filter-btn");
+
+        const cityDisplayName = cityNames[cityKey] || "Selected City";
+        const allItems = cityUniversities[cityKey] || [];
+
+        let activeFilter = "all";
+
+        title.textContent = `Universities in ${cityDisplayName}`;
+        description.textContent = `Here are universities and medical universities in ${cityDisplayName}. Use the filter buttons to choose what you want.`;
+
+        function getFilteredItems() {
+            if (activeFilter === "all") {
+                return allItems;
+            }
+
+            return allItems.filter(item => item.type === activeFilter);
+        }
+
+        function renderItems() {
+            const items = getFilteredItems();
+
+            if (!items.length) {
+                list.innerHTML = `
+          <div class="city-empty">
+            No ${activeFilter} data added for ${cityDisplayName} yet.
+          </div>
+        `;
+                return;
+            }
+
+            list.innerHTML = items.map(item => {
+                const tags = item.tags
+                    .map(tag => `<span class="city-uni-tag">${tag}</span>`)
+                    .join("");
+
+                const typeText = item.type === "medical" ? "Medical" : "University";
+                const typeClass = item.type === "medical" ? "type-medical" : "type-university";
+
+                return `
+          <article class="city-uni-card">
+            <span class="city-uni-type ${typeClass}">${typeText}</span>
+
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+
+            <div class="city-uni-tags">
+              ${tags}
+            </div>
+
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="city-uni-link">
+              Open website →
+            </a>
+          </article>
+        `;
+            }).join("");
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                activeFilter = button.dataset.filter;
+
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                renderItems();
+            });
+        });
+
+        renderItems();
+    </script>
+</body>
+
+</html>

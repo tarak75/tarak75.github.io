@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Life in Russia — Tarak</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .student-life-page {
+            padding-top: 100px;
+            padding-bottom: 70px;
+        }
+
+        .life-hero {
+            background: linear-gradient(135deg, #0f7668, #0b6d62);
+            color: #fff;
+            border-radius: 30px;
+            padding: 44px;
+            box-shadow: var(--shadow);
+            margin-bottom: 42px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .life-hero::after {
+            content: "";
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            position: absolute;
+            right: -80px;
+            top: -70px;
+        }
+
+        .life-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 7px 15px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            font-weight: 800;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .life-hero h1 {
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 1.02;
+            font-weight: 800;
+            max-width: 850px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .life-hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 880px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .life-section {
+            margin-bottom: 42px;
+        }
+
+        .life-section-head {
+            margin-bottom: 22px;
+        }
+
+        .life-section-head h2 {
+            font-size: clamp(32px, 4vw, 52px);
+            line-height: 1.08;
+            color: #081c4d;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .life-section-head p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 900px;
+        }
+
+        .life-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .life-grid-three {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .life-card {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: 0.25s ease;
+        }
+
+        .life-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .life-card h3 {
+            font-size: 24px;
+            line-height: 1.2;
+            color: #081c4d;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .life-card p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .life-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .life-list li {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 9px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .life-list li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+
+        .life-tag-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .life-tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #d9d9d9;
+            color: #1f2937;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .transport-icon,
+        .store-icon,
+        .gov-icon,
+        .doc-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            background: rgba(17, 165, 134, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 16px;
+        }
+
+        .warning-card {
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.22);
+        }
+
+        .danger-card {
+            background: rgba(220, 38, 38, 0.08);
+            border: 1px solid rgba(220, 38, 38, 0.14);
+        }
+
+        .ok-card {
+            background: rgba(17, 165, 134, 0.08);
+            border: 1px solid rgba(17, 165, 134, 0.14);
+        }
+
+        .wide-card {
+            grid-column: 1 / -1;
+        }
+
+        .rule-box {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.55);
+            margin-top: 12px;
+        }
+
+        .rule-box strong {
+            color: #081c4d;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 17px;
+        }
+
+        .mini-note {
+            font-size: 14px;
+            color: #667085;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        /* =========================
+           APPLICATION SHIFT V2
+        ========================= */
+        .apps-shift-v2 {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .as-main-card,
+        .as-item {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .as-main-card {
+            padding: 24px;
+            transition: 0.25s ease;
+        }
+
+        .as-main-card:hover,
+        .as-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .as-main-top {
+            margin-bottom: 18px;
+        }
+
+        .as-side,
+        .as-fromto {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .as-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .as-brand span {
+            font-size: 18px;
+            font-weight: 800;
+            color: #081c4d;
+            line-height: 1.25;
+        }
+
+        .as-logo {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .as-logo img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .as-fallback {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+            font-weight: 900;
+            color: #081c4d;
+        }
+
+        .as-arrow,
+        .as-plus {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .as-plus {
+            color: #94a3b8;
+        }
+
+        .as-chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .as-chip {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(17, 165, 134, 0.10);
+            color: #0b6d62;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .as-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .as-item {
+            padding: 20px 22px;
+            transition: 0.25s ease;
+        }
+
+        .as-target-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .wrap-target {
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        /* =========================
+           RUSSIAN TRANSPORT
+        ========================= */
+        .rt-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .rt-city-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .rt-city-btn {
+            min-height: 68px;
+            border: none;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: var(--shadow);
+            color: #081c4d;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.25s ease;
+            padding: 0 14px;
+        }
+
+        .rt-city-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .rt-city-btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .rt-detail-card {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            padding: 26px;
+        }
+
+        .rt-detail-top {
+            display: grid;
+            grid-template-columns: 1.2fr 0.9fr;
+            gap: 24px;
+            align-items: start;
+            margin-bottom: 24px;
+        }
+
+        .rt-badge {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(17, 165, 134, 0.12);
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .rt-detail-text h3 {
+            font-size: 34px;
+            line-height: 1.1;
+            color: #081c4d;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .rt-detail-text p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .rt-map-box {
+            width: 100%;
+            min-height: 240px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #eef2f2;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .rt-map-box img {
+            width: 100%;
+            height: 100%;
+            min-height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .rt-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .rt-info-block {
+            background: rgba(255, 255, 255, 0.58);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .rt-info-block h4 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #081c4d;
+            margin-bottom: 14px;
+        }
+
+        .rt-info-block ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .rt-info-block li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .rt-info-block li::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 9px;
+        }
+
+        @media (max-width: 1100px) {
+            .rt-city-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .rt-detail-top {
+                grid-template-columns: 1fr;
+            }
+
+            .rt-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1000px) {
+
+            .life-grid,
+            .life-grid-three {
+                grid-template-columns: 1fr;
+            }
+
+            .life-hero {
+                padding: 30px;
+            }
+
+            .as-mini-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .as-side,
+            .as-fromto {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .rt-city-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rt-detail-card {
+                padding: 20px;
+            }
+
+            .rt-detail-text h3 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .student-life-page {
+                padding-top: 80px;
+            }
+
+            .life-card {
+                padding: 20px;
+            }
+
+            .as-brand span {
+                font-size: 15px;
+            }
+
+            .as-logo {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+            }
+
+            .as-logo img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Tarak</a>
+
+            <div class="nav-actions">
+                <a href="study-in-russia.html" class="btn btn-outline">← Back</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="study-russia-page">
+        <section class="section student-life-page">
+            <div class="container">
+
+                <!-- HERO -->
+                <div class="life-hero">
+                    <span class="life-pill">Student Life in Russia</span>
+                    <h1>Culture, documents, hostel life, transport, food and daily survival guide</h1>
+                    <p>
+                        This page is for international students who want to understand real student life in Russia:
+                        culture, apps, transport, food, shops, documents, hostel rules, bank, SIM card and migration
+                        basics.
+                    </p>
+                </div>
+
+                <!-- CULTURAL VIBE -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Cultural vibe in Russia</h2>
+                        <p>
+                            Russia has a different rhythm from South Asia. People may look serious at first, but many
+                            are helpful
+                            when you speak politely and clearly. Learn basic Russian words, respect personal space, and
+                            be ready for
+                            winter, documents and public rules.
+                        </p>
+                    </div>
+
+                    <div class="life-grid-three">
+                        <div class="life-card">
+                            <h3>Communication style</h3>
+                            <p>
+                                Russians often speak directly. It does not always mean they are angry. Be polite, clear
+                                and calm.
+                            </p>
+                            <div class="life-tag-row">
+                                <span class="life-tag">Спасибо</span>
+                                <span class="life-tag">Пожалуйста</span>
+                                <span class="life-tag">Извините</span>
+                            </div>
+                        </div>
+
+                        <div class="life-card">
+                            <h3>Daily culture</h3>
+                            <p>
+                                Be punctual, keep documents with you, follow university rules, and respect quiet time in
+                                dormitories.
+                            </p>
+                            <div class="life-tag-row">
+                                <span class="life-tag">Punctuality</span>
+                                <span class="life-tag">Documents</span>
+                                <span class="life-tag">Respect</span>
+                            </div>
+                        </div>
+
+                        <div class="life-card">
+                            <h3>Student mindset</h3>
+                            <p>
+                                Russian university life can be independent. You need to check schedules, deadlines and
+                                migration papers.
+                            </p>
+                            <div class="life-tag-row">
+                                <span class="life-tag">Independent</span>
+                                <span class="life-tag">Organized</span>
+                                <span class="life-tag">Responsible</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- APPLICATION SHIFT FINAL -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Outside to Russia: Application Shift</h2>
+                        <p>Common digital shift for students moving from Outside to Russia.</p>
+                    </div>
+                
+                    <div class="app-final-wrap">
+                
+                        <!-- BIG GOOGLE TO YANDEX CARD -->
+                        <div class="gy-art-card">
+                            <div class="gy-panel gy-left">
+                                <div class="gy-head">
+
+                                    <div class="gy-main-logo">
+                                        <a href="https://about.google/" target="_blank" rel="noopener noreferrer" class="gy-main-logo-link">
+                                            <img src="images/app-logos/google.png" alt="Google">
+                                        </a>
+                                    </div>
+                                    <h3>Google</h3>
+                                </div>
+                        
+                                <div class="gy-logo-grid">
+
+                                    <a href="https://keep.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-gemini.png" alt="Google Gemini">
+                                        <span>Gemini AI</span>
+                                    </a>
+                                    <a href="https://mail.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/gmail.png" alt="Gmail">
+                                        <span>Mail</span>
+                                    </a>
+                        
+                                    <a href="https://calendar.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-calendar.png" alt="Calendar">
+                                        <span>Calendar</span>
+                                    </a>
+                        
+                                    <a href="https://maps.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-maps.png" alt="Maps">
+                                        <span>Maps</span>
+                                    </a>
+                        
+                                    <a href="https://drive.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-drive.png" alt="Drive">
+                                        <span>Drive</span>
+                                    </a>
+                        
+                                    <a href="https://www.google.com/chrome/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/chrome.png" alt="Chrome">
+                                        <span>Browser</span>
+                                    </a>
+                        
+                                    <a href="https://keep.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-keep.png" alt="Keep">
+                                        <span>Notes</span>
+                                    </a>
+
+                                    <a href="https://translate.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-translate.png" alt="Translate">
+                                        <span>Translate</span>
+                                    </a>
+
+                                    <a href="https://keep.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-pay.png" alt="Google Pay">
+                                        <span>Google Pay</span>
+                                    </a>
+
+                                    <a href="https://google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/google-auth.png" alt="Google Auth">
+                                        <span>GoogleAuth</span>
+                                    </a>
+                                </div>
+                            </div>
+                        
+                            <div class="gy-divider-art">
+                                <span class="gy-divider-line"></span>
+                                <span class="gy-divider-icon">↔</span>
+                                <span class="gy-divider-line"></span>
+                            </div>
+                        
+                            <div class="gy-panel gy-right">
+                                <div class="gy-head">
+                                    <a href="https://360.yandex.ru/" target="_blank" rel="noopener noreferrer" class="gy-main-logo-link">
+                                        <div class="gy-main-logo">
+                                            <img src="images/app-logos/yandex.png" alt="Yandex">
+                                        </div>
+                                    </a>
+                                    <h3>Yandex</h3>                          
+                                </div>
+                         
+                                <div class="gy-logo-grid">
+
+                                    <a href="https://keep.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-Alisa.png" alt="Yandex Alisa">
+                                        <span>Alisa AI</span>
+                                    </a>
+                                    <a href="https://mail.yandex.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-mail.png" alt="Yandex Mail">
+                                        <span>Mail</span>
+                                    </a>
+                        
+                                    <a href="https://calendar.yandex.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-calendar.png" alt="Calendar">
+                                        <span>Calendar</span>
+                                    </a>
+                        
+                                    <a href="https://yandex.com/maps/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-maps.png" alt="Maps">
+                                        <span>Maps</span>
+                                    </a>
+                        
+                                    <a href="https://disk.yandex.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-disk.png" alt="Disk">
+                                        <span>Drive</span>
+                                    </a>
+                        
+                                    <a href="https://browser.yandex.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-browser.png" alt="Browser">
+                                        <span>Browser</span>
+                                    </a>
+
+                                    <a href="https://360.yandex.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-notes.png" alt="Notes">
+                                        <span>Notes</span>
+                                    </a>
+
+                                    <a href="https://translate.yandex.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-translate.png" alt="Yandex Translate">
+                                        <span>Translate</span>
+                                    </a>
+
+                                    <a href="https://keep.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-pay.png" alt="Yandex Pay">
+                                        <span>Yandex Pay</span>
+                                    </a>
+                                    <a href="https://keep.google.com/" target="_blank" class="gy-app">
+                                        <img src="images/app-logos/yandex-id.png" alt="Yandex ID">
+                                        <span>Yandex ID</span>
+                                    </a>
+                        
+                                </div>
+                            </div>                  
+                        </div>
+                
+                        <!-- SMALL SHIFT CARDS -->
+                        <div class="other-apps-box">
+                            <div class="other-apps-head">
+                                <h3>Other Application Shifts</h3>
+                                <p>Common platform changes for students in Russia.</p>
+                            </div>
+                        
+                            <div class="other-apps-grid">
+                        
+                                <div class="other-app-row">
+                                    <a href="https://www.instagram.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/instagram.png" alt="Instagram">
+                                        <span>Instagram</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <a href="https://vk.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/vk.png" alt="VK">
+                                        <span>VK</span>
+                                    </a>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://www.whatsapp.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/whatsapp.png" alt="WhatsApp">
+                                        <span>WhatsApp</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <div class="other-app-targets">
+                                        <a href="https://telegram.org/" target="_blank" class="other-app-link">
+                                            <img src="images/app-logos/telegram.png" alt="Telegram">
+                                            <span>Telegram</span>
+                                        </a>
+                        
+                                        <span class="other-app-plus">+</span>
+                        
+                                        <a href="https://download.max.ru/" target="_blank" class="other-app-link">
+                                            <img src="images/app-logos/max.png" alt="MAX">
+                                            <span>MAX</span>
+                                        </a>
+                                    </div>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://www.youtube.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/youtube.png" alt="YouTube">
+                                        <span>YouTube</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <div class="other-app-targets">
+                                        <a href="https://vkvideo.ru/" target="_blank" class="other-app-link">
+                                            <img src="images/app-logos/vk-video.png" alt="VK Video">
+                                            <span>VK Video</span>
+                                        </a>
+                        
+                                        <span class="other-app-plus">+</span>
+                        
+                                        <a href="https://rutube.ru/" target="_blank" class="other-app-link">
+                                            <img src="images/app-logos/rutube.png" alt="RuTube">
+                                            <span>RuTube</span>
+                                        </a>
+                                    </div>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://zoom.us/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/zoom.png" alt="Zoom">
+                                        <span>Zoom</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <a href="https://telemost.yandex.ru/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/yandex-telemost.png" alt="Yandex Telemost">
+                                        <span>Telemost</span>
+                                    </a>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://www.amazon.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/amazon.png" alt="Amazon">
+                                        <span>Amazon</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <a href="https://www.wildberries.ru/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/wildberries.png" alt="Wildberries">
+                                        <span>Wildberries</span>
+                                    </a>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://play.google.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/playstore.png" alt="Play Store">
+                                        <span>Play Store</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <a href="https://www.rustore.ru/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/rustore.png" alt="RuStore">
+                                        <span>RuStore</span>
+                                    </a>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://www.linkedin.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/linkedin.png" alt="LinkedIn">
+                                        <span>LinkedIn</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <a href="https://hh.ru/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/hh.png" alt="hh.ru">
+                                        <span>hh.ru</span>
+                                    </a>
+                                </div>
+                        
+                                <div class="other-app-row">
+                                    <a href="https://www.dhl.com/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/dhl.png" alt="DHL">
+                                        <span>DHL</span>
+                                    </a>
+                        
+                                    <span class="other-app-arrow">→</span>
+                        
+                                    <a href="https://www.cdek.ru/" target="_blank" class="other-app-link">
+                                        <img src="images/app-logos/cdek.png" alt="CDEK">
+                                        <span>СДЭК</span>
+                                    </a>
+                                </div>
+                        
+                            </div>                  
+                        </div>
+                        <div class="important-apps-box">
+                            <div class="important-apps-head">
+                                <h3>Important Apps in Russia</h3>
+                                <p>Useful daily apps for students, transport, shopping, maps and services.</p>
+                            </div>
+                        
+                            <div class="important-apps-grid">
+                        
+                                <a href="https://mail.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/mailru.png" alt="Mail.ru">
+                                    <span>Mail.ru</span>
+                                </a>
+                        
+                                <a href="https://www.rustore.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/rustore.png" alt="RuStore">
+                                    <span>RuStore</span>
+                                </a>
+                        
+                                <a href="https://giga.chat/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/gigachat.png" alt="GigaChat">
+                                    <span>GigaChat</span>
+                                </a>
+                        
+                                <a href="#" class="important-app-link">
+                                    <img src="images/app-logos/documents.png" alt="Documents">
+                                    <span>Документы</span>
+                                </a>
+                        
+                                <a href="https://go.yandex/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/yandex-go.png" alt="Yandex Go">
+                                    <span>Yandex Go</span>
+                                </a>
+                        
+                                <a href="#" class="important-app-link">
+                                    <img src="images/app-logos/myid.png" alt="Мой ID">
+                                    <span>Мой ID</span>
+                                </a>
+                        
+                                <a href="https://games.yandex.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/yandex-games.png" alt="Yandex Games">
+                                    <span>Yandex Games</span>
+                                </a>
+                        
+                                <a href="https://yandex.com/weather/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/yandex-weather.png" alt="Yandex Weather">
+                                    <span>Yandex Weather</span>
+                                </a>
+                        
+                                <a href="https://2gis.com/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/2gis.png" alt="2GIS">
+                                    <span>2GIS</span>
+                                </a>
+                        
+                                <a href="https://www.ozon.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/ozon.png" alt="Ozon">
+                                    <span>Ozon</span>
+                                </a>
+                        
+                                <a href="https://www.avito.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/avito.png" alt="Avito">
+                                    <span>Avito</span>
+                                </a>
+                        
+                                <a href="https://www.tutu.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/tutu.png" alt="Tutu">
+                                    <span>Tutu</span>
+                                </a>
+                        
+                                <a href="https://dzen.ru/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/dzen.png" alt="Dzen">
+                                    <span>Dzen</span>
+                                </a>
+                        
+                                <a href="https://www.getcontact.com/" target="_blank" rel="noopener noreferrer" class="important-app-link">
+                                    <img src="images/app-logos/getcontact.png" alt="Getcontact">
+                                    <span>Getcontact</span>
+                                </a>
+                        
+                            </div>                  
+                        </div>
+                    </div>      
+                </section>
+                
+
+                <!-- FOOD -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian food and available food types</h2>
+                        <p>
+                            You can find Russian food, Central Asian food, Caucasus food, European food and many
+                            international options.
+                            In big cities, halal and vegetarian options are easier to find.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <h3>Common Russian food</h3>
+                            <ul class="life-list">
+                                <li>Борщ — beetroot soup</li>
+                                <li>Пельмени — dumplings</li>
+                                <li>Блины — pancakes</li>
+                                <li>Каша — porridge</li>
+                                <li>Салат Оливье — Russian salad</li>
+                                <li>Котлета — cutlet</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card">
+                            <h3>Food you can usually find</h3>
+                            <ul class="life-list">
+                                <li>Halal food in many big cities</li>
+                                <li>Indian / Pakistani / Bangladeshi restaurants in major cities</li>
+                                <li>Uzbek plov, samsa and lagman</li>
+                                <li>Georgian khachapuri and khinkali</li>
+                                <li>Fast food, pizza, sushi and burgers</li>
+                                <li>Vegetarian food, but check ingredients carefully</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STORES -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Stores in Russia</h2>
+                        <p>
+                            These stores are useful for students because they are common, affordable and easy to access.
+                        </p>
+                    </div>
+
+                    <div class="life-grid-three">
+                        <div class="life-card">
+                            <div class="store-icon">🛒</div>
+                            <h3>Пятёрочка</h3>
+                            <p>Popular grocery store for daily food, snacks, water and basic home needs.</p>
+                            <span class="life-tag">Daily grocery</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="store-icon">🛒</div>
+                            <h3>Магнит</h3>
+                            <p>Another common grocery chain. Good for quick shopping and affordable products.</p>
+                            <span class="life-tag">Affordable</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="store-icon">🛍️</div>
+                            <h3>Перекрёсток</h3>
+                            <p>Usually has more product choice than small discount stores.</p>
+                            <span class="life-tag">More choice</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="store-icon">🛒</div>
+                            <h3>Ашан</h3>
+                            <p>Large hypermarket. Good for monthly shopping, household things and bulk products.</p>
+                            <span class="life-tag">Big shopping</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="store-icon">📦</div>
+                            <h3>Ozon / Wildberries</h3>
+                            <p>Online marketplaces for clothes, electronics, study items and household products.</p>
+                            <span class="life-tag">Online</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="store-icon">💊</div>
+                            <h3>Аптека</h3>
+                            <p>Pharmacy. Useful for medicine, vitamins and health products. Some medicines need
+                                prescription.</p>
+                            <span class="life-tag">Medicine</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GOVERNMENT -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian government services you should know</h2>
+                        <p>
+                            Foreign students often meet these government services for migration, tax, documents,
+                            insurance, university papers and daily official procedures.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <div class="gov-icon">🏛️</div>
+                            <h3>МВД — Ministry of Internal Affairs</h3>
+                            <p>
+                                Handles many migration matters: registration, migration status, permits and foreigner
+                                legal stay.
+                            </p>
+                            <span class="life-tag">Migration</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="gov-icon">💻</div>
+                            <h3>Госуслуги</h3>
+                            <p>
+                                Government online portal. Useful for many public services, account verification,
+                                SIM-related steps and official requests.
+                            </p>
+                            <span class="life-tag">Online services</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="gov-icon">🏢</div>
+                            <h3>МФЦ — My Documents</h3>
+                            <p>
+                                Public service center where people can submit or receive different documents and
+                                applications.
+                            </p>
+                            <span class="life-tag">Documents</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="gov-icon">💰</div>
+                            <h3>ФНС — Federal Tax Service</h3>
+                            <p>Related to tax registration and ИНН.</p>
+                            <span class="life-tag">Tax / INN</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="gov-icon">📄</div>
+                            <h3>СФР — Social Fund of Russia</h3>
+                            <p>Related to СНИЛС and social insurance account information.</p>
+                            <span class="life-tag">SNILS</span>
+                        </div>
+
+                        <div class="life-card">
+                            <div class="gov-icon">🎓</div>
+                            <h3>University International Office</h3>
+                            <p>
+                                Not a government body, but very important. They help with student visa, registration,
+                                orders and migration papers.
+                            </p>
+                            <span class="life-tag">Student support</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- HOSTEL -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>University hostel life</h2>
+                        <p>
+                            Hostel rules are different in every university, but most Russian dormitories have common
+                            rules.
+                            Always read your dormitory contract and ask your dormitory administration.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card ok-card">
+                            <h3>What you can usually do</h3>
+                            <ul class="life-list">
+                                <li>Live in your assigned room</li>
+                                <li>Use shared kitchen, laundry and study area</li>
+                                <li>Invite guests if dormitory rules allow it</li>
+                                <li>Decorate your space without damaging property</li>
+                                <li>Cook simple food in allowed kitchen areas</li>
+                                <li>Ask administration for repair problems</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card danger-card">
+                            <h3>What you usually cannot do</h3>
+                            <ul class="life-list">
+                                <li>Break quiet hours at night</li>
+                                <li>Damage furniture or university property</li>
+                                <li>Smoke in forbidden areas</li>
+                                <li>Use dangerous electrical devices if prohibited</li>
+                                <li>Bring unknown people without permission</li>
+                                <li>Leave garbage or dirty kitchen after cooking</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card wide-card">
+                            <h3>Important hostel rules</h3>
+                            <div class="rule-box">
+                                <strong>Documents</strong>
+                                <p>Keep passport, migration card, registration and student ID safe. Do not give original
+                                    documents to random people.</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>Roommates</strong>
+                                <p>Respect other students’ sleep, prayer, study time and personal space.</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>Cleanliness</strong>
+                                <p>Clean your part of the room, kitchen and bathroom. Hostel problems usually start from
+                                    dirty shared areas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DOCUMENTS AND 18+ -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian documents and 18+ rules for foreigners</h2>
+                        <p>
+                            This is a simple student guide. Rules can change, so check official sources and your
+                            university international office.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <div class="doc-icon">📄</div>
+                            <h3>Main documents to keep safe</h3>
+                            <ul class="life-list">
+                                <li>Passport</li>
+                                <li>Visa, if your country needs visa</li>
+                                <li>Migration card</li>
+                                <li>Registration slip</li>
+                                <li>Student ID</li>
+                                <li>Medical insurance</li>
+                                <li>University order / study certificate</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card warning-card">
+                            <div class="doc-icon">🔞</div>
+                            <h3>18+ rules</h3>
+                            <ul class="life-list">
+                                <li>Alcohol and tobacco rules are strict; shops may ask for passport</li>
+                                <li>Do not drink alcohol in prohibited public places</li>
+                                <li>Do not smoke in forbidden areas</li>
+                                <li>Do not use or buy illegal drugs</li>
+                                <li>Follow university and hostel discipline rules</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RVPO -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>РВПО — Temporary Residence Permit for Education</h2>
+                        <p>
+                            РВПО is a temporary residence permit for educational purposes. It is important for many
+                            full-time foreign students in Russia.
+                        </p>
+                    </div>
+
+                    <div class="life-card">
+                        <h3>Who can usually apply?</h3>
+                        <ul class="life-list">
+                            <li>Foreign students studying full-time in eligible Russian state educational or scientific
+                                organizations</li>
+                            <li>Usually bachelor, specialist, master, postgraduate, residency and similar full-time
+                                programs</li>
+                            <li>Preparatory course and online-only students may not be eligible</li>
+                        </ul>
+
+                        <h3>Why it is useful</h3>
+                        <ul class="life-list">
+                            <li>Gives a stronger legal status during study</li>
+                            <li>Can help later with long-term residence steps</li>
+                            <li>Reduces some repeated visa pressure for eligible students</li>
+                        </ul>
+
+                        <p class="mini-note">
+                            Always ask your university international office first because document list and local
+                            process can depend on city and university.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- VNЖ -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>ВНЖ — Residence Permit</h2>
+                        <p>
+                            ВНЖ is a residence permit. It is usually a bigger step after temporary legal status or
+                            special eligibility.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <h3>Why students think about ВНЖ</h3>
+                            <ul class="life-list">
+                                <li>Longer stay in Russia</li>
+                                <li>More stable legal status</li>
+                                <li>Future work and life planning</li>
+                                <li>Possible step before citizenship for some people</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card">
+                            <h3>Common idea</h3>
+                            <p>
+                                Many foreigners first receive temporary status, then later apply for residence permit if
+                                they meet legal conditions.
+                                Students with РВПО may have a student-related route after graduation, but exact
+                                conditions should be checked before applying.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RED PASSPORT -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian red passport — citizenship</h2>
+                        <p>
+                            The Russian red passport means Russian citizenship. It is not automatic after study.
+                            Foreigners need a legal basis and must follow the citizenship procedure.
+                        </p>
+                    </div>
+
+                    <div class="life-card">
+                        <h3>General path idea</h3>
+                        <ul class="life-list">
+                            <li>Legal stay in Russia</li>
+                            <li>Valid documents and registration</li>
+                            <li>Possible РВП / РВПО / ВНЖ route depending on situation</li>
+                            <li>Meeting citizenship conditions</li>
+                            <li>Application through official procedure</li>
+                        </ul>
+
+                        <p class="mini-note">
+                            Citizenship rules are legal matters. Never rely only on social media advice. Check official
+                            information or a qualified migration lawyer.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ILLEGAL FOREIGNER RULES -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian rules for illegal foreigners</h2>
+                        <p>
+                            Do not overstay and do not ignore registration or visa problems. Migration violations can
+                            create serious consequences.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card danger-card">
+                            <h3>What can create problems?</h3>
+                            <ul class="life-list">
+                                <li>Expired visa or migration card</li>
+                                <li>No valid registration</li>
+                                <li>Working without legal permission</li>
+                                <li>False documents</li>
+                                <li>Ignoring МВД or university migration instructions</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card warning-card">
+                            <h3>Possible consequences</h3>
+                            <ul class="life-list">
+                                <li>Fine</li>
+                                <li>Exit requirement</li>
+                                <li>Deportation or expulsion in serious cases</li>
+                                <li>Entry ban</li>
+                                <li>Problems with future visa, РВПО, ВНЖ or citizenship</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SNILS INN -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>СНИЛС and ИНН</h2>
+                        <p>
+                            These two numbers are very useful for foreigners living, studying or working in Russia.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <h3>СНИЛС</h3>
+                            <p>
+                                СНИЛС is an individual insurance account number. It is often needed for Госуслуги,
+                                SIM card procedures, work and some official services.
+                            </p>
+                            <ul class="life-list">
+                                <li>Usually needs passport</li>
+                                <li>Foreigners may need notarized Russian translation of passport</li>
+                                <li>Can be connected with Госуслуги account</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card">
+                            <h3>ИНН</h3>
+                            <p>
+                                ИНН is a taxpayer identification number. It can be useful for work, banking, tax matters
+                                and official forms.
+                            </p>
+                            <ul class="life-list">
+                                <li>Issued through tax service procedure</li>
+                                <li>Foreigners may need passport and proof of legal stay</li>
+                                <li>Documents may need Russian translation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BANK -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian bank rules for foreign students</h2>
+                        <p>
+                            A Russian bank card is useful for transport, stores, online shopping, salary, scholarship
+                            and rent payments.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <h3>Usually needed</h3>
+                            <ul class="life-list">
+                                <li>Passport</li>
+                                <li>Notarized translation, if bank asks</li>
+                                <li>Migration card</li>
+                                <li>Registration</li>
+                                <li>Russian phone number</li>
+                                <li>Sometimes ИНН or СНИЛС</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card">
+                            <h3>Student tips</h3>
+                            <ul class="life-list">
+                                <li>Use a well-known bank</li>
+                                <li>Ask about fees and card service cost</li>
+                                <li>Do not share card PIN or SMS codes</li>
+                                <li>Be careful with online scams</li>
+                                <li>Keep bank app and phone number secure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SIM -->
+                <section class="life-section">
+                    <div class="life-section-head">
+                        <h2>Russian SIM card and mobile rules</h2>
+                        <p>
+                            SIM card rules for foreigners became stricter. Prepare documents before buying or confirming
+                            a Russian SIM card.
+                        </p>
+                    </div>
+
+                    <div class="life-grid">
+                        <div class="life-card">
+                            <h3>Usually needed for a SIM card</h3>
+                            <ul class="life-list">
+                                <li>Passport</li>
+                                <li>Notarized Russian translation of passport</li>
+                                <li>СНИЛС</li>
+                                <li>Confirmed Госуслуги account</li>
+                                <li>Biometric registration through an approved bank or system</li>
+                            </ul>
+                        </div>
+
+                        <div class="life-card warning-card">
+                            <h3>Mobile safety rules</h3>
+                            <ul class="life-list">
+                                <li>Do not buy SIM cards from random people</li>
+                                <li>Use official operator stores</li>
+                                <li>Keep your number registered correctly</li>
+                                <li>Do not share SMS codes</li>
+                                <li>Use your phone number carefully for bank and Госуслуги</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const transportData = {
+            "moscow": {
+                badge: "Big 5 City",
+                title: "Moscow Transport",
+                intro: "Moscow has one of the biggest transport systems in Russia with metro, buses, electric buses, trams, MCC, MCD and suburban rail.",
+                map: "images/transport/maps/moscow-map.jpg",
+                metro: [
+                    "Large metro network with many lines and interchange stations",
+                    "MCC helps cross-city travel",
+                    "MCD suburban lines connect city and outer areas",
+                    "Useful for daily student travel"
+                ],
+                stations: [
+                    "Leningradsky Railway Station",
+                    "Kazansky Railway Station",
+                    "Yaroslavsky Railway Station",
+                    "Kursky Railway Station",
+                    "Belorussky Railway Station",
+                    "Paveletsky Railway Station"
+                ],
+                bus: [
+                    "Buses and electric buses are common",
+                    "Metro + bus combination is best for students",
+                    "Use official stops only",
+                    "Check route in Yandex Maps or Moscow transport apps"
+                ],
+                payment: [
+                    "Troika card is the most useful",
+                    "Bank card payment is common",
+                    "Some student discounts may exist through local systems",
+                    "Keep enough balance before travel"
+                ]
+            },
+
+            "saint-petersburg": {
+                badge: "Big 5 City",
+                title: "Saint Petersburg Transport",
+                intro: "Saint Petersburg has metro, buses, trams, trolleybuses and suburban rail. It is one of the strongest city transport systems in Russia.",
+                map: "images/transport/maps/saint-petersburg-map.jpg",
+                metro: [
+                    "Metro has several major lines",
+                    "Very useful for central city movement",
+                    "Good interchange between metro and buses",
+                    "Useful during winter and traffic hours"
+                ],
+                stations: [
+                    "Moskovsky Railway Station",
+                    "Ladozhsky Railway Station",
+                    "Finlyandsky Railway Station",
+                    "Baltiysky Railway Station",
+                    "Vitebsky Railway Station"
+                ],
+                bus: [
+                    "Bus and tram system is large",
+                    "Good for districts where metro is not close",
+                    "Follow stop display and route number",
+                    "Use transport apps for real-time directions"
+                ],
+                payment: [
+                    "Podorozhnik card is common",
+                    "Bank card often works",
+                    "Transport cards are better for regular use",
+                    "Keep card ready before entering"
+                ]
+            },
+
+            "kazan": {
+                badge: "Student City",
+                title: "Kazan Transport",
+                intro: "Kazan has metro, buses, trams and trolleybuses. It is easier to understand than Moscow and comfortable for students.",
+                map: "images/transport/maps/kazan-map.jpg",
+                metro: [
+                    "Kazan metro is smaller than Moscow",
+                    "Useful for key city areas",
+                    "Easy for students to learn quickly",
+                    "Often combined with bus transport"
+                ],
+                stations: [
+                    "Kazan-Passazhirskaya Railway Station",
+                    "Kazan-2 Railway Station",
+                    "Central Bus Station"
+                ],
+                bus: [
+                    "Buses are the main daily transport",
+                    "Trams also work in many areas",
+                    "Watch route number carefully",
+                    "Use city transport card or bank card if available"
+                ],
+                payment: [
+                    "Local transport card is useful",
+                    "Cashless payment is common",
+                    "Carry a backup bank card",
+                    "Check city-specific student benefits"
+                ]
+            },
+
+            "vladivostok": {
+                badge: "Far East City",
+                title: "Vladivostok Transport",
+                intro: "Vladivostok mainly uses buses, taxis, railway and some special local transport like funicular connections.",
+                map: "images/transport/maps/vladivostok-map.jpg",
+                metro: [
+                    "No metro system",
+                    "City movement depends more on buses and cars",
+                    "Suburban rail can help in some directions",
+                    "Funicular is a local transport feature"
+                ],
+                stations: [
+                    "Vladivostok Railway Station",
+                    "Bus terminals",
+                    "Port and ferry-related areas"
+                ],
+                bus: [
+                    "Bus is the main city transport",
+                    "Taxi is also common because of hills and distance",
+                    "Check route before travel",
+                    "Weather can affect daily movement"
+                ],
+                payment: [
+                    "Bank card and local methods may be used",
+                    "Cash backup is useful",
+                    "Taxi price should be checked before booking",
+                    "Use trusted transport apps"
+                ]
+            },
+
+            "nizhny-novgorod": {
+                badge: "Regional Hub",
+                title: "Nizhny Novgorod Transport",
+                intro: "Nizhny Novgorod has metro, buses, trams and suburban transport. It is a good student city with a manageable network.",
+                map: "images/transport/maps/nizhny-novgorod-map.jpg",
+                metro: [
+                    "Metro has limited but useful city coverage",
+                    "Helpful for daily student routes",
+                    "Can be combined with buses and trams",
+                    "Good for core city movement"
+                ],
+                stations: [
+                    "Moskovsky Railway Station",
+                    "Main bus terminals",
+                    "Suburban rail points"
+                ],
+                bus: [
+                    "Buses and маршрутка routes are important",
+                    "Trams are also part of city travel",
+                    "Always check exact stop name",
+                    "Peak hour can be crowded"
+                ],
+                payment: [
+                    "Local transport card may be available",
+                    "Bank card often works",
+                    "Have backup payment method",
+                    "Check local student fare options"
+                ]
+            },
+
+            "novosibirsk": {
+                badge: "Big 5 City",
+                title: "Novosibirsk Transport",
+                intro: "Novosibirsk is a major Siberian city with metro, buses, trams and suburban rail. Students use mixed transport systems daily.",
+                map: "images/transport/maps/novosibirsk-map.jpg",
+                metro: [
+                    "Metro has a smaller network than Moscow",
+                    "Useful for important city zones",
+                    "Good with bus combinations",
+                    "Helps during winter travel"
+                ],
+                stations: [
+                    "Novosibirsk-Glavny Railway Station",
+                    "Main bus terminals",
+                    "Suburban rail stations"
+                ],
+                bus: [
+                    "Buses and маршрутка are very common",
+                    "Trams also operate in the city",
+                    "Route planning is important for new students",
+                    "Use map apps to avoid confusion"
+                ],
+                payment: [
+                    "Transport card may be used",
+                    "Bank card payment is often possible",
+                    "Keep warm and plan extra travel time in winter",
+                    "Ask local students about best route tools"
+                ]
+            },
+
+            "yekaterinburg": {
+                badge: "Big 5 City",
+                title: "Yekaterinburg Transport",
+                intro: "Yekaterinburg has metro, buses, trams and trolleybuses. It is a strong regional city with practical public transport.",
+                map: "images/transport/maps/yekaterinburg-map.jpg",
+                metro: [
+                    "Metro is smaller but useful",
+                    "Works well with buses and trams",
+                    "Easy for students to understand",
+                    "Covers key areas"
+                ],
+                stations: [
+                    "Yekaterinburg-Passazhirskiy Railway Station",
+                    "Main bus stations",
+                    "Regional train connections"
+                ],
+                bus: [
+                    "Bus and tram network is important",
+                    "Trolleybuses also exist",
+                    "Transport is useful for students living outside center",
+                    "Use route apps and local maps"
+                ],
+                payment: [
+                    "Local card systems may be available",
+                    "Bank card often works",
+                    "Check the exact fare locally",
+                    "Keep a small backup payment option"
+                ]
+            }
+        };
+
+        const rtButtons = document.querySelectorAll(".rt-city-btn");
+        const rtBadge = document.getElementById("rtBadge");
+        const rtTitle = document.getElementById("rtTitle");
+        const rtIntro = document.getElementById("rtIntro");
+        const rtMapImage = document.getElementById("rtMapImage");
+        const rtMetroList = document.getElementById("rtMetroList");
+        const rtStationList = document.getElementById("rtStationList");
+        const rtBusList = document.getElementById("rtBusList");
+        const rtPaymentList = document.getElementById("rtPaymentList");
+
+        function makeList(items) {
+            return items.map(item => `<li>${item}</li>`).join("");
+        }
+
+        function renderTransport(cityKey) {
+            const data = transportData[cityKey];
+            if (!data) return;
+
+            rtBadge.textContent = data.badge;
+            rtTitle.textContent = data.title;
+            rtIntro.textContent = data.intro;
+            rtMapImage.src = data.map;
+            rtMapImage.alt = data.title + " map";
+
+            rtMetroList.innerHTML = makeList(data.metro);
+            rtStationList.innerHTML = makeList(data.stations);
+            rtBusList.innerHTML = makeList(data.bus);
+            rtPaymentList.innerHTML = makeList(data.payment);
+        }
+
+        rtButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                rtButtons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+
+                const city = this.dataset.city;
+                renderTransport(city);
+
+                document.getElementById("rtDetailCard").scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            });
+        });
+
+        renderTransport("moscow");
+    </script>
+</body>
+
+</html>

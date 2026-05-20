@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Образование — Таракан</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Таракан</a>
+
+            <div class="nav-actions">
+                <a href="index.html#education" class="btn btn-outline">← Назад</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="education-page details-page">
+        <div class="page-bg-icons education-common-bg">
+            <span>🎓</span>
+            <span>📘</span>
+            <span>📚</span>
+            <span>🧪</span>
+            <span>💻</span>
+            <span>🎨</span>
+            <span>📝</span>
+            <span>📐</span>
+            <span>🧠</span>
+            <span>⚛</span>
+            <span>🔬</span>
+            <span>&lt;/&gt;</span>
+        </div>
+
+        <section class="section education-hero">
+            <div class="container">
+                <div class="section-head center">
+                    <h1>Моё образование</h1>
+                    <p>Школа, колледж и университет в одном разделе</p>
+                </div>
+
+                <div class="education-tabs">
+                    <button class="education-tab active" data-tab="school">Школа</button>
+                    <button class="education-tab" data-tab="college">Колледж</button>
+                    <button class="education-tab" data-tab="university">Университет</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section education-detail-section">
+            <div class="container">
+                <div class="education-detail-card">
+                    <div class="education-info">
+                        <span class="education-badge big" id="eduBadge">Школа</span>
+                        <h2 id="eduTitle">Директор школы Кази Фаруки</h2>
+
+                        <ul class="education-detail-list" id="eduList">
+                            <li><strong>Местоположение:</strong> Лакшмипур</li>
+                            <li><strong>Направление:</strong> Наука</li>
+                            <li><strong>Результат:</strong> 4 из 5</li>
+                        </ul>
+
+                        <p id="eduText1">
+                            Эта школа дала мне важный старт в жизни. Кроме того, у меня остались хорошие воспоминания,
+                             учителя и несколько школьных друзей.
+                        </p>
+
+                        <p id="eduText2">
+                            На этот раз я понимаю, что это мои собственные решения. Я делаю большой,
+                            очень важный шаг, и у меня так много воспоминаний о школьном общежитии.
+                        </p>
+                    </div>
+
+                    <div class="education-main-photo">
+                        <img src="images/school/main.jpg" alt="Образование" id="eduMainImage">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section gallery-section">
+            <div class="container">
+                <div class="section-head center">
+                    <h2>Фотогалерея</h2>
+                    <p id="galleryTitle">Мои школьные фотографии</p>
+                </div>
+
+                <div class="education-gallery">
+                    <img src="images/school/photo1.jpg" alt="Фото 1" id="gallery1">
+                    <img src="images/school/photo2.jpg" alt="Фото 2" id="gallery2">
+                    <img src="images/school/photo3.jpg" alt="Фото 3" id="gallery3">
+                    <img src="images/school/photo4.jpg" alt="Фото 4" id="gallery4">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const educationData = {
+            school: {
+                badge: "Школа",
+                title: "Principal Kazi Faruki School",
+                list: `
+      <li><strong>Местоположение:</strong> Lakshmipur</li>
+      <li><strong>Направление:</strong> Science</li>
+      <li><strong>Результат:</strong> 4 из 5</li>
+    `,
+                text1: "Здесь можно написать подробнее о моем школьном обучении, достижениях, интересах и важных этапах моего развития.",
+                text2: "В школе я получил базовые знания, которые стали основой для моего дальнейшего образования и профессионального роста.",
+                galleryTitle: "Мои школьные фотографии",
+                mainImage: "images/school/main.jpg",
+                gallery: [
+                    "images/school/photo1.jpg",
+                    "images/school/photo2.jpg",
+                    "images/school/photo3.jpg",
+                    "images/school/photo4.jpg"
+                ]
+            },
+
+            college: {
+                badge: "Колледж",
+                title: "Монипур уччо биддалой и College",
+                list: `
+      <li><strong>Местоположение:</strong> Dhaka</li>
+      <li><strong>Направление:</strong> Science</li>
+      <li><strong>Результат:</strong> 4 из 5</li>
+    `,
+                text1: "Здесь можно добавить подробную информацию о моем обучении в колледже, академических успехах, участии в мероприятиях и личном развитии.",
+                text2: "Период обучения в колледже стал важным этапом подготовки к поступлению в университет и дальнейшему профессиональному пути.",
+                galleryTitle: "Мои фотографии из колледжа",
+                mainImage: "images/college/main.jpg",
+                gallery: [
+                    "images/college/photo1.jpg",
+                    "images/college/photo2.jpg",
+                    "images/college/photo3.jpg",
+                    "images/college/photo4.jpg"
+                ]
+            },
+
+            university: {
+                badge: "Университет",
+                title: "Российский государственный университет имени А. Н. Косыгина",
+                list: `
+      <li><strong>Местоположение:</strong> Москва</li>
+      <li><strong>Направление:</strong> IT в дизайне</li>
+      <li><strong>Статус:</strong> Информация будет обновлена</li>
+    `,
+                text1: "Эта часть страницы находится в разработке. Подробная информация о моем обучении в университете будет добавлена в будущем.",
+                text2: "В будущем здесь появятся материалы об учебном процессе, университетской жизни, моих проектах и достижениях.",
+                galleryTitle: "Фотографии будут добавлены в будущем",
+                mainImage: "images/university/main.jpg",
+                gallery: [
+                    "images/university/photo1.jpg",
+                    "images/university/photo2.jpg",
+                    "images/university/photo3.jpg",
+                    "images/university/photo4.jpg"
+                ]
+            }
+        };
+
+        const badge = document.getElementById("eduBadge");
+        const title = document.getElementById("eduTitle");
+        const list = document.getElementById("eduList");
+        const text1 = document.getElementById("eduText1");
+        const text2 = document.getElementById("eduText2");
+        const galleryTitle = document.getElementById("galleryTitle");
+        const mainImage = document.getElementById("eduMainImage");
+        const gallery1 = document.getElementById("gallery1");
+        const gallery2 = document.getElementById("gallery2");
+        const gallery3 = document.getElementById("gallery3");
+        const gallery4 = document.getElementById("gallery4");
+        const tabs = document.querySelectorAll(".education-tab");
+
+        function setEducation(tabName) {
+            const data = educationData[tabName];
+            if (!data) return;
+
+            badge.textContent = data.badge;
+            title.textContent = data.title;
+            list.innerHTML = data.list;
+            text1.textContent = data.text1;
+            text2.textContent = data.text2;
+            galleryTitle.textContent = data.galleryTitle;
+            mainImage.src = data.mainImage;
+
+            gallery1.src = data.gallery[0];
+            gallery2.src = data.gallery[1];
+            gallery3.src = data.gallery[2];
+            gallery4.src = data.gallery[3];
+
+            tabs.forEach(tab => {
+                tab.classList.remove("active");
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add("active");
+                }
+            });
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                const selected = tab.dataset.tab;
+                setEducation(selected);
+            });
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const startTab = params.get("tab") || "school";
+        setEducation(startTab);
+    </script>
+
+</body>
+
+</html>

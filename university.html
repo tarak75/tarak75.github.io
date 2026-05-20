@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>University — Study in Russia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .university-page-wrap {
+            padding-top: 100px;
+            padding-bottom: 70px;
+        }
+
+        .uni-page-head {
+            margin-bottom: 28px;
+        }
+
+        .uni-page-head h1 {
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #081c4d;
+        }
+
+        .uni-page-head p {
+            max-width: 900px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .uni-toolbar {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .uni-filter-status {
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: var(--shadow);
+            color: #081c4d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .uni-reset-btn {
+            min-height: 42px;
+            padding: 0 18px;
+            border-radius: 999px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .uni-reset-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .uni-table-head {
+            display: grid;
+            grid-template-columns: 72px minmax(280px, 2.1fr) 170px minmax(260px, 1.4fr) 110px;
+            gap: 18px;
+            padding: 0 18px 12px;
+            color: #111;
+            font-size: 15px;
+            align-items: center;
+        }
+
+        .uni-list {
+            display: grid;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .uni-row {
+            display: grid;
+            grid-template-columns: 72px minmax(280px, 2.1fr) 170px minmax(260px, 1.4fr) 110px;
+            gap: 18px;
+            align-items: center;
+            min-height: 110px;
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 26px;
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            transition: 0.25s ease;
+            cursor: pointer;
+        }
+
+        .uni-row:hover {
+            transform: translateY(-4px);
+        }
+
+        .uni-row.matching {
+            outline: 2px solid rgba(17, 165, 134, 0.18);
+            box-shadow: 0 12px 28px rgba(17, 165, 134, 0.12);
+        }
+
+        .uni-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #081c4d;
+            text-align: center;
+        }
+
+        .uni-name {
+            min-width: 0;
+        }
+
+        .uni-name a {
+            font-size: 18px;
+            font-weight: 800;
+            color: #101828;
+            line-height: 1.35;
+            text-decoration: none;
+        }
+
+        .uni-name a:hover {
+            color: var(--primary);
+        }
+
+        .uni-city,
+        .uni-subject,
+        .uni-rank {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .uni-city {
+            flex-wrap: nowrap;
+        }
+
+        .uni-subject {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: thin;
+            padding-bottom: 2px;
+        }
+
+        .uni-rank {
+            justify-content: center;
+        }
+
+        .uni-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 28px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #d9d9d9;
+            color: #1f2937;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+            flex: 0 0 auto;
+        }
+
+        .uni-tag:hover {
+            background: #cfcfcf;
+        }
+
+        .uni-tag.active-tag {
+            background: rgba(17, 165, 134, 0.18);
+            color: #0b6d62;
+        }
+
+        .uni-rank-pill {
+            min-width: 44px;
+            background: #d9d9d9;
+            color: #081c4d;
+            font-weight: 800;
+            cursor: default;
+        }
+
+        .uni-empty {
+            padding: 24px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.72);
+            color: var(--muted);
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 1200px) {
+
+            .uni-table-head,
+            .uni-row {
+                grid-template-columns: 64px minmax(220px, 1.8fr) 150px minmax(220px, 1.2fr) 90px;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .uni-table-head {
+                display: none;
+            }
+
+            .uni-row {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                min-height: auto;
+            }
+
+            .uni-number {
+                text-align: left;
+            }
+
+            .uni-city,
+            .uni-subject,
+            .uni-rank {
+                justify-content: flex-start;
+            }
+
+            .uni-city::before,
+            .uni-subject::before,
+            .uni-rank::before {
+                width: 100%;
+                display: block;
+                font-size: 12px;
+                font-weight: 700;
+                color: var(--muted);
+                margin-bottom: 2px;
+            }
+
+            .uni-city {
+                flex-wrap: wrap;
+            }
+
+            .uni-subject {
+                flex-wrap: wrap;
+                overflow-x: visible;
+            }
+
+            .uni-city::before {
+                content: "City";
+            }
+
+            .uni-subject::before {
+                content: "Special Subject";
+            }
+
+            .uni-rank::before {
+                content: "Forbes 2026";
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Таракан</a>
+            <div class="nav-actions">
+                <a href="study-in-russia.html" class="btn btn-outline">← Back</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="study-russia-page">
+        <section class="section university-page-wrap">
+            <div class="container">
+                <div class="uni-page-head">
+                    <div class="uni-head-top">
+                        <span class="study-pill dark-pill">University</span>
+                
+                        <a href="https://forms.yandex.ru/u/69a1d28aeb61461584d99e3b" target="_blank" rel="noopener noreferrer"
+                            class="uni-apply-btn">
+                            Apply
+                        </a>
+                    </div>
+                
+                    <h1>Top Russian Universities</h1>
+                    <p>
+                        Click a university row to open its official website. Click a city tag or subject tag to move matching
+                        universities to the top.
+                    </p>
+                
+                    <div class="uni-toolbar">
+                        <div class="uni-filter-status" id="uniFilterStatus">Showing all universities</div>
+                        <button class="uni-reset-btn" id="resetFilterBtn" type="button">Reset</button>
+                    </div>            
+                </div>
+
+                <div class="uni-table-head">
+                    <div>No</div>
+                    <div>University</div>
+                    <div>City</div>
+                    <div>Special Subject</div>
+                    <div>Ranking</div>
+                </div>
+
+                <div class="uni-list" id="uniList"></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const universities = [
+            {
+                name: "HSE University",
+                city: "Moscow",
+                subject: ["Economics", "Technology", "Data Science"],
+                rank: 1,
+                url: "https://www.hse.ru/en/"
+            },
+            {
+                name: "Lomonosov Moscow State University",
+                city: "Moscow",
+                subject: ["Science", "Humanities", "Law"],
+                rank: 2,
+                url: "https://msu.ru/en/"
+            },
+            {
+                name: "Moscow Institute of Physics and Technology (MIPT)",
+                city: "Moscow Region",
+                subject: ["Physics", "Technology", "Research"],
+                rank: 3,
+                url: "https://eng.mipt.ru/"
+            },
+            {
+                name: "ITMO University",
+                city: "Saint Petersburg",
+                subject: ["IT", "Engineering", "AI"],
+                rank: 4,
+                url: "https://en.itmo.ru/"
+            },
+            {
+                name: "Saint Petersburg State University",
+                city: "Saint Petersburg",
+                subject: ["Science", "Humanities", "Law"],
+                rank: 5,
+                url: "https://english.spbu.ru/"
+            },
+            {
+                name: "National Research Nuclear University MEPhI",
+                city: "Moscow",
+                subject: ["Nuclear", "Engineering", "Physics"],
+                rank: 6,
+                url: "https://eng.mephi.ru/"
+            },
+            {
+                name: "Bauman Moscow State Technical University",
+                city: "Moscow",
+                subject: ["Engineering", "Technology", "Robotics"],
+                rank: 7,
+                url: "https://bmstu.ru/en/"
+            },
+            {
+                name: "MISIS University",
+                city: "Moscow",
+                subject: ["Materials", "Engineering", "Technology"],
+                rank: 8,
+                url: "https://en.misis.ru/"
+            },
+            {
+                name: "Plekhanov Russian University of Economics",
+                city: "Moscow",
+                subject: ["Economics", "Business", "Management"],
+                rank: 9,
+                url: "https://www.rea.ru/en"
+            },
+            {
+                name: "MGIMO University",
+                city: "Moscow",
+                subject: ["International Relations", "Diplomacy"],
+                rank: 10,
+                url: "https://english.mgimo.ru/"
+            },
+            {
+                name: "Financial University",
+                city: "Moscow",
+                subject: ["Finance", "Economics", "Business"],
+                rank: 11,
+                url: "https://fa.ru/"
+            },
+            {
+                name: "RANEPA",
+                city: "Moscow",
+                subject: ["Management", "Public Policy"],
+                rank: 12,
+                url: "https://www.ranepa.ru/"
+            },
+            {
+                name: "Novosibirsk State University",
+                city: "Novosibirsk",
+                subject: ["Science", "Research", "Technology"],
+                rank: 13,
+                url: "https://english.nsu.ru/"
+            },
+            {
+                name: "New Economic School",
+                city: "Moscow",
+                subject: ["Economics", "Data Science", "Finance"],
+                rank: 14,
+                url: "https://www.nes.ru/en/"
+            },
+            {
+                name: "Peter the Great St. Petersburg Polytechnic University",
+                city: "Saint Petersburg",
+                subject: ["Engineering", "Technology", "Industry"],
+                rank: 15,
+                url: "https://english.spbstu.ru/"
+            },
+            {
+                name: "Ural Federal University",
+                city: "Yekaterinburg",
+                subject: ["Engineering", "Science", "Technology"],
+                rank: 16,
+                url: "https://urfu.ru/en/"
+            },
+            {
+                name: "Innopolis University",
+                city: "Innopolis",
+                subject: ["IT", "AI", "Software"],
+                rank: 17,
+                url: "https://innopolis.university/en/"
+            },
+            {
+                name: "RUDN University",
+                city: "Moscow",
+                subject: ["Medicine", "International Studies"],
+                rank: 18,
+                url: "https://eng.rudn.ru/"
+            },
+            {
+                name: "Central University",
+                city: "Moscow",
+                subject: ["Business", "Technology", "Analytics"],
+                rank: 19,
+                url: "https://centraluniversity.ru/"
+            },
+            {
+                name: "Sechenov University",
+                city: "Moscow",
+                subject: ["Medicine", "Healthcare", "Biotechnology"],
+                rank: 20,
+                url: "https://www.sechenov.ru/eng/"
+            },
+            {
+                name: "Gubkin Russian State University of Oil and Gas",
+                city: "Moscow",
+                subject: ["Engineering", "Natural sciences"],
+                rank: 51,
+                url: "https://rguk.ru/"
+            },
+            
+            {
+                name: "Russian State University name after kosygin",
+                city: "Moscow",
+                subject: ["Textile", "Design", "Science"],
+                rank: 52,
+                url: "https://rguk.ru/"
+            },
+            {
+                name: "Kazan Federal University",
+                city: "Kazan",
+                subject: ["Science", "Education", "International"],
+                rank: null,
+                url: "https://eng.kpfu.ru/"
+            },
+            {
+                name: "Tomsk Polytechnic University",
+                city: "Tomsk",
+                subject: ["Engineering", "Energy", "Technology"],
+                rank: null,
+                url: "https://tpu.ru/en/"
+            },
+            {
+                name: "Far Eastern Federal University",
+                city: "Vladivostok",
+                subject: ["International", "Asia-Pacific", "Science"],
+                rank: null,
+                url: "https://www.dvfu.ru/en/"
+            },
+            {
+                name: "Southern Federal University",
+                city: "Rostov-on-Don",
+                subject: ["Science", "Humanities", "Technology"],
+                rank: null,
+                url: "https://sfedu.ru/"
+            },
+            {
+                name: "Lobachevsky University",
+                city: "Nizhny Novgorod",
+                subject: ["Science", "IT", "Humanities"],
+                rank: null,
+                url: "https://eng.unn.ru/"
+            },
+            {
+                name: "Siberian Federal University",
+                city: "Krasnoyarsk",
+                subject: ["Engineering", "Science", "Campus"],
+                rank: null,
+                url: "https://www.sfu-kras.ru/en"
+            },
+            {
+                name: "Samara University",
+                city: "Samara",
+                subject: ["Aerospace", "Engineering", "Technology"],
+                rank: null,
+                url: "https://ssau.ru/english"
+            },
+            {
+                name: "Moscow Power Engineering Institute",
+                city: "Moscow",
+                subject: ["Energy", "Electrical Engineering", "Technology"],
+                rank: null,
+                url: "https://mpei.ru/lang/en"
+            },
+            {
+                name: "Moscow Aviation Institute",
+                city: "Moscow",
+                subject: ["Aviation", "Engineering", "Space"],
+                rank: null,
+                url: "https://en.mai.ru/"
+            },
+            {
+                name: "Saint Petersburg Electrotechnical University LETI",
+                city: "Saint Petersburg",
+                subject: ["Electronics", "Engineering", "IT"],
+                rank: null,
+                url: "https://etu.ru/en/"
+            },
+            {
+                name: "Moscow State University of Civil Engineering",
+                city: "Moscow",
+                subject: ["Civil Engineering", "Architecture", "Construction"],
+                rank: null,
+                url: "https://mgsu.ru/en/"
+            },
+            {
+                name: "Gubkin University",
+                city: "Moscow",
+                subject: ["Oil and Gas", "Engineering", "Energy"],
+                rank: null,
+                url: "https://gubkin.university/"
+            },
+            {
+                name: "Russian State University for the Humanities",
+                city: "Moscow",
+                subject: ["Humanities", "History", "Culture"],
+                rank: null,
+                url: "https://www.rsuh.ru/en/"
+            },
+            {
+                name: "Moscow Polytechnic University",
+                city: "Moscow",
+                subject: ["Engineering", "Design", "Technology"],
+                rank: null,
+                url: "https://mospolytech.ru/en/"
+            },
+            {
+                name: "MIREA — Russian Technological University",
+                city: "Moscow",
+                subject: ["IT", "Cybersecurity", "Technology"],
+                rank: null,
+                url: "https://english.mirea.ru/"
+            },
+            {
+                name: "Russian University of Transport",
+                city: "Moscow",
+                subject: ["Transport", "Engineering", "Logistics"],
+                rank: null,
+                url: "https://rut-miit.ru/"
+            },
+            {
+                name: "Saint Petersburg Mining University",
+                city: "Saint Petersburg",
+                subject: ["Mining", "Geology", "Engineering"],
+                rank: null,
+                url: "https://spmi.ru/en"
+            },
+            {
+                name: "Kuban State University",
+                city: "Krasnodar",
+                subject: ["Science", "Economics", "Humanities"],
+                rank: null,
+                url: "https://www.kubsu.ru/en"
+            },
+            {
+                name: "University of Tyumen",
+                city: "Tyumen",
+                subject: ["Science", "Humanities", "Management"],
+                rank: null,
+                url: "https://utmn.ru/en/"
+            },
+            {
+                name: "Perm State University",
+                city: "Perm",
+                subject: ["Science", "Humanities", "Research"],
+                rank: null,
+                url: "https://en.psu.ru/"
+            },
+            {
+                name: "Immanuel Kant Baltic Federal University",
+                city: "Kaliningrad",
+                subject: ["Medicine", "Humanities", "International"],
+                rank: null,
+                url: "https://kantiana.ru/en/"
+            },
+            {
+                name: "North-Caucasus Federal University",
+                city: "Stavropol",
+                subject: ["Engineering", "Science", "Regional Studies"],
+                rank: null,
+                url: "https://eng.ncfu.ru/"
+            },
+            {
+                name: "Mordovia State University",
+                city: "Saransk",
+                subject: ["Science", "Engineering", "Medicine"],
+                rank: null,
+                url: "https://mrsu.ru/en/"
+            },
+            {
+                name: "South Ural State University",
+                city: "Chelyabinsk",
+                subject: ["Engineering", "IT", "Science"],
+                rank: null,
+                url: "https://www.susu.ru/en"
+            },
+            {
+                name: "Ufa University of Science and Technology",
+                city: "Ufa",
+                subject: ["Engineering", "Science", "Aviation"],
+                rank: null,
+                url: "https://uust.ru/en/"
+            },
+            {
+                name: "Saratov State University",
+                city: "Saratov",
+                subject: ["Science", "Humanities", "Research"],
+                rank: null,
+                url: "https://www.sgu.ru/en"
+            },
+            {
+                name: "Belgorod State National Research University",
+                city: "Belgorod",
+                subject: ["Medicine", "Science", "Research"],
+                rank: null,
+                url: "https://bsuedu.ru/en/"
+            },
+            {
+                name: "Voronezh State University",
+                city: "Voronezh",
+                subject: ["Science", "IT", "Humanities"],
+                rank: null,
+                url: "https://www.vsu.ru/en/"
+            },
+            {
+                name: "Altai State University",
+                city: "Barnaul",
+                subject: ["Science", "Humanities", "Regional Studies"],
+                rank: null,
+                url: "https://www.asu.ru/en/"
+            },
+            {
+                name: "Irkutsk State University",
+                city: "Irkutsk",
+                subject: ["Science", "Humanities", "Siberia"],
+                rank: null,
+                url: "https://isu.ru/en/"
+            }
+        ];
+
+    const uniList = document.getElementById("uniList");
+    const uniFilterStatus = document.getElementById("uniFilterStatus");
+    const resetFilterBtn = document.getElementById("resetFilterBtn");
+
+    let activeFilter = null;
+
+    function sortValue(item) {
+        if (item.rank !== null && item.rank !== undefined) {
+            return item.rank;
+        }
+
+        return 1000 + universities.indexOf(item);
+    }
+
+    function getSortedData() {
+        const data = [...universities];
+
+        if (!activeFilter) {
+            return data.sort((a, b) => sortValue(a) - sortValue(b));
+        }
+
+        const matches = [];
+        const others = [];
+
+        data.forEach(item => {
+            let isMatch = false;
+
+            if (activeFilter.type === "city") {
+                isMatch = item.city === activeFilter.value;
+            }
+
+            if (activeFilter.type === "subject") {
+                isMatch = item.subject.includes(activeFilter.value);
+            }
+
+            if (isMatch) {
+                matches.push(item);
+            } else {
+                others.push(item);
+            }
+        });
+
+        matches.sort((a, b) => sortValue(a) - sortValue(b));
+        others.sort((a, b) => sortValue(a) - sortValue(b));
+
+        return [...matches, ...others];
+    }
+
+    function makeTag(text, type, isActive = false) {
+        const activeClass = isActive ? "active-tag" : "";
+        return `<button class="uni-tag ${activeClass}" type="button" data-filter-type="${type}" data-filter-value="${text}">${text}</button>`;
+    }
+
+    function renderUniversities() {
+        const sorted = getSortedData();
+
+        if (!sorted.length) {
+            uniList.innerHTML = `<div class="uni-empty">No universities found.</div>`;
+            return;
+        }
+
+        uniList.innerHTML = sorted.map((uni, index) => {
+            const displayNo = index + 1;
+
+            const matchesFilter = !activeFilter
+                ? false
+                : (
+                    (activeFilter.type === "city" && uni.city === activeFilter.value) ||
+                    (activeFilter.type === "subject" && uni.subject.includes(activeFilter.value))
+                );
+
+            const cityTag = makeTag(
+                uni.city,
+                "city",
+                activeFilter && activeFilter.type === "city" && activeFilter.value === uni.city
+            );
+
+            const subjectTags = uni.subject.map(sub =>
+                makeTag(
+                    sub,
+                    "subject",
+                    activeFilter && activeFilter.type === "subject" && activeFilter.value === sub
+                )
+            ).join("");
+
+            const rankText = uni.rank === null || uni.rank === undefined ? "—" : uni.rank;
+            const rankClass = uni.rank === null || uni.rank === undefined ? "no-rank" : "";
+
+            return `
+      <article class="uni-row ${matchesFilter ? "matching" : ""}" data-url="${uni.url}">
+        <div class="uni-number">${displayNo}</div>
+
+        <div class="uni-name">
+          <a href="${uni.url}" target="_blank" rel="noopener noreferrer">${uni.name}</a>
+        </div>
+
+        <div class="uni-city">${cityTag}</div>
+
+        <div class="uni-subject">${subjectTags}</div>
+
+        <div class="uni-rank">
+          <span class="uni-tag uni-rank-pill ${rankClass}">${rankText}</span>
+        </div>
+      </article>
+    `;
+        }).join("");
+
+        bindRowClicks();
+        bindTagClicks();
+        renderFilterText();
+    }
+
+    function renderFilterText() {
+        if (!activeFilter) {
+            uniFilterStatus.textContent = "Showing all universities";
+            return;
+        }
+
+        if (activeFilter.type === "city") {
+            uniFilterStatus.textContent = `City filter: ${activeFilter.value}`;
+            return;
+        }
+
+        if (activeFilter.type === "subject") {
+            uniFilterStatus.textContent = `Subject filter: ${activeFilter.value}`;
+        }
+    }
+
+    function bindRowClicks() {
+        document.querySelectorAll(".uni-row").forEach(row => {
+            row.addEventListener("click", (e) => {
+                if (e.target.closest(".uni-tag") || e.target.closest("a")) return;
+
+                const url = row.dataset.url;
+
+                if (url) {
+                    window.open(url, "_blank", "noopener,noreferrer");
+                }
+            });
+        });
+    }
+
+    function bindTagClicks() {
+        document.querySelectorAll(".uni-tag[data-filter-type]").forEach(tag => {
+            tag.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const type = tag.dataset.filterType;
+                const value = tag.dataset.filterValue;
+
+                if (activeFilter && activeFilter.type === type && activeFilter.value === value) {
+                    activeFilter = null;
+                } else {
+                    activeFilter = { type, value };
+                }
+
+                renderUniversities();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+    }
+
+    resetFilterBtn.addEventListener("click", () => {
+        activeFilter = null;
+        renderUniversities();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    renderUniversities();
+</script>
+</body>
+
+</html>

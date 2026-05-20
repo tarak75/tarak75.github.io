@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>City — Study in Russia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .city-page-wrap {
+            padding-top: 100px;
+            padding-bottom: 70px;
+        }
+
+        .city-page-head {
+            margin-bottom: 34px;
+        }
+
+        .city-page-head h1 {
+            font-size: clamp(38px, 5vw, 64px);
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #081c4d;
+        }
+
+        .city-page-head p {
+            max-width: 920px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .city-highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 34px;
+        }
+
+        .city-highlight-card {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .city-highlight-card h3 {
+            font-size: 24px;
+            color: #081c4d;
+            margin-bottom: 8px;
+        }
+
+        .city-highlight-card p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .city-small-badge {
+            display: inline-flex;
+            min-height: 30px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(17, 165, 134, 0.12);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 26px;
+        }
+
+        .city-box {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.25s ease;
+        }
+
+        .city-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .city-image-wrap {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+            background: #dfe7e7;
+        }
+
+        .city-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .city-number {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .city-content {
+            padding: 24px;
+        }
+
+        .city-top-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .city-content h3 {
+            font-size: 30px;
+            line-height: 1.15;
+            color: #081c4d;
+            font-weight: 800;
+        }
+
+        .city-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 30px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .badge-student {
+            background: rgba(17, 165, 134, 0.14);
+            color: #0b6d62;
+        }
+
+        .badge-foreigner {
+            background: rgba(31, 41, 55, 0.10);
+            color: #081c4d;
+        }
+
+        .badge-balance {
+            background: rgba(99, 102, 241, 0.12);
+            color: #3730a3;
+        }
+
+        .badge-research {
+            background: rgba(245, 158, 11, 0.14);
+            color: #92400e;
+        }
+
+        .city-content p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .city-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .city-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 28px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #d9d9d9;
+            color: #1f2937;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .city-best-for {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(17, 165, 134, 0.08);
+        }
+
+        .city-best-for strong {
+            display: block;
+            color: #081c4d;
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .city-best-for p {
+            margin-bottom: 0;
+            font-size: 15px;
+        }
+
+        .city-university-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            margin-top: 18px;
+            padding: 0 20px;
+            border-radius: 999px;
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 800;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .city-university-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1100px) {
+            .city-highlight-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .city-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .city-image-wrap {
+                height: 210px;
+            }
+
+            .city-content {
+                padding: 20px;
+            }
+
+            .city-top-row {
+                flex-direction: column;
+            }
+
+            .city-content h3 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Tarak</a>
+
+            <div class="nav-actions">
+                <a href="study-in-russia.html" class="btn btn-outline">← Back</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="study-russia-page">
+        <section class="section city-page-wrap">
+            <div class="container">
+                <div class="city-page-head">
+                    <span class="study-pill dark-pill">City</span>
+
+                    <h1>Top 10 Russian Cities for Students</h1>
+
+                    <p>
+                        Here are 10 strong Russian cities for international students.
+                        Some cities are better for study, some are better for foreigners,
+                        and some give a good balance between education, life and cost.
+                    </p>
+                </div>
+
+                <div class="city-highlight-grid">
+                    <div class="city-highlight-card">
+                        <span class="city-small-badge">Best for students</span>
+                        <h3>Tomsk</h3>
+                        <p>
+                            Tomsk is a strong student city with a serious academic atmosphere
+                            and many students.
+                        </p>
+                    </div>
+
+                    <div class="city-highlight-card">
+                        <span class="city-small-badge">Good for foreigners</span>
+                        <h3>Moscow</h3>
+                        <p>
+                            Moscow is easier for many foreigners because it has more services,
+                            transport, universities and international communities.
+                        </p>
+                    </div>
+
+                    <div class="city-highlight-card">
+                        <span class="city-small-badge">Best balance</span>
+                        <h3>Kazan</h3>
+                        <p>
+                            Kazan is multicultural, student-friendly and usually more affordable
+                            than Moscow or Saint Petersburg.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="city-grid">
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/moscow.jpg" alt="Moscow">
+                            <div class="city-number">1</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Moscow</h3>
+                                <span class="city-badge badge-foreigner">Good for foreigners</span>
+                            </div>
+
+                            <p>
+                                Moscow is the capital of Russia and the biggest educational,
+                                business and international center.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Capital</span>
+                                <span class="city-tag">Top universities</span>
+                                <span class="city-tag">International</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want more opportunities, strong transport and a big international
+                                    community.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=moscow" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/saint-petersburg.jpg" alt="Saint Petersburg">
+                            <div class="city-number">2</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Saint Petersburg</h3>
+                                <span class="city-badge badge-foreigner">Good for foreigners</span>
+                            </div>
+
+                            <p>
+                                Saint Petersburg is the cultural capital of Russia with beautiful
+                                architecture and strong universities.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Culture</span>
+                                <span class="city-tag">History</span>
+                                <span class="city-tag">Student life</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who love culture, museums, city beauty and international atmosphere.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=saint-petersburg" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/kazan.jpg" alt="Kazan">
+                            <div class="city-number">3</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Kazan</h3>
+                                <span class="city-badge badge-balance">Best balance</span>
+                            </div>
+
+                            <p>
+                                Kazan is a multicultural city with strong student life,
+                                beautiful places and a comfortable atmosphere.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Multicultural</span>
+                                <span class="city-tag">Affordable</span>
+                                <span class="city-tag">Student-friendly</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want a good balance between education, culture and living cost.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=kazan" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/tomsk.jpg" alt="Tomsk">
+                            <div class="city-number">4</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Tomsk</h3>
+                                <span class="city-badge badge-student">Best for students</span>
+                            </div>
+
+                            <p>
+                                Tomsk is one of the strongest student cities in Russia with a
+                                serious academic environment.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Student city</span>
+                                <span class="city-tag">Academic</span>
+                                <span class="city-tag">Study focus</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want strong study atmosphere and Russian-language immersion.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=tomsk" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/novosibirsk.jpg" alt="Novosibirsk">
+                            <div class="city-number">5</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Novosibirsk</h3>
+                                <span class="city-badge badge-research">Research city</span>
+                            </div>
+
+                            <p>
+                                Novosibirsk is a major Siberian city with strong research,
+                                science and academic opportunities.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Science</span>
+                                <span class="city-tag">Research</span>
+                                <span class="city-tag">Siberia</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students interested in science, research and a serious academic environment.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=novosibirsk" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/yekaterinburg.jpg" alt="Yekaterinburg">
+                            <div class="city-number">6</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Yekaterinburg</h3>
+                                <span class="city-badge badge-balance">Good balance</span>
+                            </div>
+
+                            <p>
+                                Yekaterinburg is a large Ural city with engineering education,
+                                student life and business opportunities.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Engineering</span>
+                                <span class="city-tag">Ural</span>
+                                <span class="city-tag">Big city</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want engineering, technology and a large regional city.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=yekaterinburg" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/nizhny-novgorod.jpg" alt="Nizhny Novgorod">
+                            <div class="city-number">7</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Nizhny Novgorod</h3>
+                                <span class="city-badge badge-student">Good for study</span>
+                            </div>
+
+                            <p>
+                                Nizhny Novgorod is a strong Volga city with technical,
+                                science and engineering education.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Volga</span>
+                                <span class="city-tag">STEM</span>
+                                <span class="city-tag">Technical</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want a serious regional university city with technical focus.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=nizhny-novgorod" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/vladivostok.jpg" alt="Vladivostok">
+                            <div class="city-number">8</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Vladivostok</h3>
+                                <span class="city-badge badge-balance">Global outlook</span>
+                            </div>
+
+                            <p>
+                                Vladivostok is a Far East city with sea views and strong
+                                connection to the Asia-Pacific region.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Far East</span>
+                                <span class="city-tag">Sea city</span>
+                                <span class="city-tag">Asia-Pacific</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students interested in international relations, regional studies and sea-city life.
+                                </p>
+                            </div>
+
+                            <a href="city-universities.html?city=vladivostok" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/samara.jpg" alt="Samara">
+                            <div class="city-number">9</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Samara</h3>
+                                <span class="city-badge badge-student">Engineering</span>
+                            </div>
+
+                            <p>
+                                Samara is an important industrial city with strong engineering
+                                and aerospace-related opportunities.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">Industry</span>
+                                <span class="city-tag">Engineering</span>
+                                <span class="city-tag">Aerospace</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want industrial and practical technical opportunities.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=samara" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="city-box">
+                        <div class="city-image-wrap">
+                            <img src="images/cities/rostov-on-don.jpg" alt="Rostov-on-Don">
+                            <div class="city-number">10</div>
+                        </div>
+
+                        <div class="city-content">
+                            <div class="city-top-row">
+                                <h3>Rostov-on-Don</h3>
+                                <span class="city-badge badge-foreigner">Foreign students</span>
+                            </div>
+
+                            <p>
+                                Rostov-on-Don is a southern Russian city with student life,
+                                warm atmosphere and international student presence.
+                            </p>
+
+                            <div class="city-tags">
+                                <span class="city-tag">South Russia</span>
+                                <span class="city-tag">Student life</span>
+                                <span class="city-tag">Warm city</span>
+                            </div>
+
+                            <div class="city-best-for">
+                                <strong>Best for:</strong>
+                                <p>Students who want a southern city with a friendly student environment.</p>
+                            </div>
+
+                            <a href="city-universities.html?city=rostov-on-don" class="city-university-btn">
+                                Universities →
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
